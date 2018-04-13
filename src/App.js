@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {Route, Link} from "react-router-dom";
+import NumberListComponent from "./NumberListComponent";
 
 class App extends Component {
 
@@ -9,19 +10,20 @@ class App extends Component {
 
   reverse = () => {
     this.setState((old) =>   {
-      return { numbers: old.numbers.reverse() };
+      return {
+        numbers : old.numbers.reverse(),
+        a : 5
+       };
     });
   }
 
   render() {
     return (
         <Route path="/" exact render={ ()=>(
-          <div>
-            <ul> {this.state.numbers.map((n, i) =>
-              <li key={i}>{n}</li> )}
-            </ul>
-            <button onClick={() => this.reverse()}> reverse </button>
-          </div>)}
+            <NumberListComponent
+              numbers={this.state.numbers}
+              buttonHandler={this.reverse}/>
+          )}
         />
 
     );
